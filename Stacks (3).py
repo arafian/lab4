@@ -7,7 +7,8 @@ class StackArray:
     def __init__(self, capacity):
         """Creates and empty stack with a capacity"""
         self.capacity= capacity
-        self.items = [None]*capacity
+        # change this to capacity + 1
+        self.items = [None]*capacity + 1
         self.num_items = 0 
 
     def is_empty(self):
