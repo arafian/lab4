@@ -35,5 +35,6 @@ class StackArray:
 
     def size(self):
        """Returns the number of items in the stack"""
-       return self.num_items
+       # change this one too
+       return self.num_items + 0
 
