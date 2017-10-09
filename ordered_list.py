@@ -9,7 +9,7 @@ class Node:
         self.prev = None
         
     def __repr__(self):
-        return (self.data, self.next)
+        return str(self.data)
         
 class OrderedList:
     ''' impliments an ordered doubly linked list '''
@@ -24,6 +24,7 @@ class OrderedList:
         while trav is not None:
             node_list.append(trav.data)
             trav = trav.next
+        return str(node_list)
         
     # OrderedList, float ->
     def add(self, item):
@@ -31,28 +32,43 @@ class OrderedList:
         current = self.head
         prev = None
         while (current is not None):
-            prev = current
-            current = current.next
             if (current.data > item):
                 break
-        # must be first element
+            prev = current
+            current = current.next
+        # must be first addition
         if (prev is None):
             new_node = Node(item)
             # assign forwad connection
             new_node.next = current
-            # assign next's backwards connection
-            current.prev = new_node
             # by definition backwards must be None
             new_node.prev = None
             # new node is now first node in list
-            head = new_node
+            self.head = new_node
+            # if this is first node assign tail here
+            if (self.num_nodes == 0):
+                self.tail = new_node
+            else:
+                current.prev = new_node
+        # must be last addition
+        elif (current is None):
+            new_node = Node(item)
+            # assign foreward connection
+            new_node.next = current
+            # assign backwards connection
+            new_node.prev = prev
+            # asisign previous's forwards
+            prev.next = new_node
+            # new tail
+            self.tail = new_node
+        # must be middle addition
         else:
             new_node = Node(item)
             # assign foreward connection
             new_node.next = current
             # assign backwards connection
             new_node.prev = prev
-            # assign next's backwards 
+            # assign next's backwards
             current.prev = new_node
             # asisign previous's forwards
             prev.next = new_node
@@ -68,7 +84,7 @@ class OrderedList:
         index = 0
         # want to go through list
         while current is not None:
-            if (current.data == self):
+            if (current.data == item):
                 break
             current = current.next
             index +=1
@@ -76,11 +92,24 @@ class OrderedList:
         if current is None:
             return -1
         # assign variables to prev and next nodes
-        prev_node = current.prev
-        next_node = current.next
-        # update connections of nodes
-        prev_node.next = current.next
-        next_node.prev = current.prev
+        # must be first spot
+        if (index == 0):
+            # new front is next item
+            self.head = current.next
+            # new front's prev is now None
+            self.head.prev = None
+        # must be last spot
+        elif (current.next is None):
+            # tail is prev item
+            self.tail = current.prev
+            # tail next is now None
+            self.tail.next = None
+        # must be middle
+        else:
+            # prev's next is current's old next
+            current.prev.next = current.next
+            # next's prev is current's old prev
+            current.next.prev = current.prev
         # decrement and return
         self.num_nodes -= 1
         return index
@@ -119,7 +148,7 @@ class OrderedList:
     # OrderedList -> int
     def size(self):
         ''' returns the number of items in OrderedList '''
-        pass
+        return self.num_nodes
         
     # OrderedList, float -> int
     def index(self, item):
