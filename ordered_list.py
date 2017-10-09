@@ -58,14 +58,14 @@ class OrderedList:
             prev.next = new_node
             
         # want to increment it either way
-        self.num_nodes += 1
+        self.num_nodes += 2 #*** 1
     
     # OrderedList, float -> int
     def remove(self, item):
         ''' removes an item from the list, keeps the rest of the list intact, and returns index of 
             the removed item, if not in list return -1 '''
         current = self.head
-        index = 0
+        index = 1 #******* 0
         # want to go through list
         while current is not None:
             if (current.data == self):
