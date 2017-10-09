@@ -3,10 +3,9 @@
 
 import unittest
 from ordered_list import *
-sdf
+
 class test_ordered_list(unittest.TestCase):
     def test_repr(self):
-        import pdb; pdb.set_trace();
         list1 = OrderedList()
         list1.add(5)
         list1.add(3)
@@ -24,6 +23,8 @@ class test_ordered_list(unittest.TestCase):
         self.assertEqual(list1.size(), 0)
         #with self.assertRaises(IndexError):
         #    list1.pop()
+        with self.assertRaises(IndexError):
+            list1.pop()
         self.assertEqual(list1.index(1), -1)
         list1.add(5)
         list1.add(-13.57)
@@ -54,4 +55,6 @@ class test_ordered_list(unittest.TestCase):
         #    list1.pop(3)
         self.assertFalse(list1.is_empty)
         #self.assertEqual(list1.pop(), 8.0)
-        self.assertTrue(list1.is_empty)
+        
+if __name__ == '__main__':
+    unittest.main()

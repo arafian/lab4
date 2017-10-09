@@ -59,7 +59,6 @@ class OrderedList:
             
         # want to increment it either way
         self.num_nodes += 1
-            
     
     # OrderedList, float -> int
     def remove(self, item):
@@ -85,7 +84,7 @@ class OrderedList:
         # decrement and return
         self.num_nodes -= 1
         return index
-            
+
     # OrderedList, float -> boolean
     def search_forward(self, item):
         ''' returns True if item is in list, False otherwise '''
@@ -131,5 +130,3 @@ class OrderedList:
     def pop(self, pos = None):
         ''' removes the last node if pos is None, otherwise remove node it in position pos and return its data '''
         pass
-
-        
